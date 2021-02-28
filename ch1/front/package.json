@@ -1,0 +1,16 @@
+{
+  "name": "vue-nodebird-front",
+  "version": "1.0.0",
+  "description": "vue node bird study",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "nuxt"
+  },
+  "author": "manbalboy",
+  "license": "MIT",
+  "dependencies": {
+    "nuxt": "^2.15.2",
+    "vue": "^2.6.12"
+  }
+}
