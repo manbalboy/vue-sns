@@ -5,13 +5,12 @@
       <nuxt-link to="/profile">profile</nuxt-link>
       <nuxt-link to="/signup">signup</nuxt-link>
     </div>
-    hello profile
+    <nuxt></nuxt>
   </div>
 </template>
 
 <script>
 export default {
-name: "profile"
 }
 </script>
 
