@@ -10,7 +10,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  // head() {
+  //   return {
+  //     title : 'ㅋㅋㅋ'
+  //   }
+  // }
+
+}
 </script>
 
 <style scoped>

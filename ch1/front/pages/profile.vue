@@ -6,7 +6,12 @@
 
 <script>
 export default {
-name: "profile"
+  name: "profile",
+  head() {
+    return {
+      title : 'profile'
+    }
+  }
 }
 </script>
 

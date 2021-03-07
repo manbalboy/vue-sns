@@ -7,7 +7,12 @@
 <script>
 export default {
   layout : 'admin',
-  name: "signup"
+  name: "signup",
+  head() {
+    return {
+      title : 'signup'
+    }
+  }
 }
 </script>
 
