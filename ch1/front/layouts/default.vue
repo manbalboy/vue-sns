@@ -22,7 +22,7 @@
       왼쪽
     </v-col>
     <v-col cols="12" md="8">
-      오른쪽
+      <nuxt/>
     </v-col>
   </v-row>
 </v-app>
