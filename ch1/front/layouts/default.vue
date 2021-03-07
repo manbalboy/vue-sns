@@ -1,12 +1,24 @@
 <template>
+<v-app>
   <div>
-    <div>
-      <nuxt-link to="/">Home</nuxt-link>
-      <nuxt-link to="/profile">profile</nuxt-link>
-      <nuxt-link to="/signup">signup</nuxt-link>
-    </div>
-    <nuxt></nuxt>
+    <v-toolbar>
+      <v-toolbar-title>
+        <nuxt-link to="/">NodeBird</nuxt-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-text-field/>
+        <v-btn text nuxt to="/profile">
+          <div>프로필</div>
+        </v-btn>
+        <v-btn text nuxt to="/signup">
+          <div>회원가입</div>
+        </v-btn>
+
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
+</v-app>
 </template>
 
 <script>
