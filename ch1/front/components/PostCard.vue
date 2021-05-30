@@ -1,6 +1,6 @@
 <template>
     <v-card style="margin-bottom: 20px">
-        <v-image />
+        <!--        <v-image />-->
         <v-card-text>
             <div>
                 <h3>Manbalboy</h3>
