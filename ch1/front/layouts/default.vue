@@ -18,10 +18,10 @@
     </v-toolbar>
   </nav>
   <v-row>
-    <v-col cols="12" md="4">
+    <v-col cols="12" xs="12" md="4">
       왼쪽
     </v-col>
-    <v-col cols="12" md="8">
+    <v-col cols="12" xs="12" md="8">
       <nuxt/>
     </v-col>
   </v-row>
@@ -30,12 +30,9 @@
 
 <script>
 export default {
-  // head() {
-  //   return {
-  //     title : 'ㅋㅋㅋ'
-  //   }
-  // }
-
+  mounted () {
+    console.log(this.$vuetify.breakpoint.width)
+  }
 }
 </script>
 
