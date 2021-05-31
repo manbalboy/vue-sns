@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     export default {
         // layout : 'admin',
         name: 'Signup',
@@ -70,9 +71,16 @@
             };
         },
         methods: {
+            ...mapActions('users', ['SIGN_UP']),
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
-                    alert('회원가입');
+                    this.SIGN_UP({ email: this.email, nickname: this.nickname })
+                        .then(() => {
+                            this.$router.push({ path: '/' });
+                        })
+                        .catch(() => {
+                            console.log('회원가입 실패');
+                        });
                 } else {
                     console.log(this.valid);
                 }
