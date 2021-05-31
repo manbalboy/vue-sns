@@ -14,9 +14,9 @@
                     :rules="[v => !!v.trim() || '내용을 입력하세요.']"
                     @input="onChangeTextarea"
                 />
+                <v-btn type="submit" color="green" absolute right> 짹짹 </v-btn>
+                <v-btn>이미지업로드</v-btn>
             </v-form>
-            <v-btn type="submit" color="green" absolute right> 짹짹 </v-btn>
-            <v-btn>이미지업로드</v-btn>
         </v-container>
     </v-card>
 </template>
@@ -47,6 +47,8 @@
                 this.successMessages = '';
             },
             onSubmitForm() {
+                alert(1);
+                console.log(this.$refs.form.validate());
                 if (this.$refs.form.validate()) {
                     this.ADD({
                         content: this.content,
