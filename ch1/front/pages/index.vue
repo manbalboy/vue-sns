@@ -2,10 +2,7 @@
     <v-container>
         <PostForm v-if="me" />
         <div>
-            <post-card />
-            <post-card />
-            <post-card />
-            <post-card />
+            <post-card v-for="p in mainPosts" :key="p.id" :post="p" />
         </div>
     </v-container>
 </template>
@@ -27,6 +24,7 @@
         },
         computed: {
             ...mapState('users', ['me']),
+            ...mapState('posts', ['mainPosts']),
         },
     };
 </script>

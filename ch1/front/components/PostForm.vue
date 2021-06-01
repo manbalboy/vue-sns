@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card style="margin-bottom: 20px">
         <v-container>
             <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
                 <v-textarea
@@ -47,7 +47,6 @@
                 this.successMessages = '';
             },
             onSubmitForm() {
-                alert(1);
                 console.log(this.$refs.form.validate());
                 if (this.$refs.form.validate()) {
                     this.ADD({
@@ -60,6 +59,7 @@
                         id: Date.now(),
                         createdAt: Date.now(),
                     }).then(() => {
+                        this.content = '';
                         this.hideDetails = false;
                         this.success = true;
                         this.successMessages = '게시글 등록 성공!';
