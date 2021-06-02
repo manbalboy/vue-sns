@@ -11,6 +11,10 @@ export const mutations = {
 
         state.mainPosts.splice(index, 1);
     },
+    ADD_COMMENT(state, payload) {
+        const index = state.mainPosts.findIndex(v => v.id === payload.postId);
+        state.mainPosts[index].Comments.unshift(payload);
+    },
 };
 
 export const actions = {
@@ -20,5 +24,9 @@ export const actions = {
 
     REMOVE(context, payload) {
         context.commit('REMOVE_MAIN_POST', payload);
+    },
+
+    ADD_COMMENT(context, payload) {
+        context.commit('ADD_COMMENT', payload);
     },
 };

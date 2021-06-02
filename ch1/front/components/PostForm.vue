@@ -41,10 +41,12 @@
 
         methods: {
             ...mapActions('posts', ['ADD']),
-            onChangeTextarea() {
-                this.hideDetails = true;
-                this.success = false;
-                this.successMessages = '';
+            onChangeTextarea(value) {
+                if (value.length) {
+                    this.hideDetails = true;
+                    this.success = false;
+                    this.successMessages = '';
+                }
             },
             onSubmitForm() {
                 console.log(this.$refs.form.validate());
