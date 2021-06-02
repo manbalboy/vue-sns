@@ -6,6 +6,9 @@ export const mutations = {
     SET_ME(state, payload) {
         state.me = payload;
     },
+    CHANGE_NICKNAME(state, payload) {
+        state.me['nickname'] = payload.nickname;
+    },
 };
 
 export const actions = {
@@ -19,5 +22,9 @@ export const actions = {
 
     LOGOUT(context) {
         context.commit('SET_ME', null);
+    },
+
+    CHANGE_NICKNAME(context, payload) {
+        context.commit('CHANGE_NICKNAME', payload);
     },
 };
