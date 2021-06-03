@@ -23,10 +23,10 @@
             </v-toolbar>
         </nav>
         <v-row no-gutters>
-            <v-col cols="12" xs="12" md="4">
+            <v-col cols="12" md="4">
                 <login-form />
             </v-col>
-            <v-col cols="12" xs="12" md="8">
+            <v-col cols="12" md="8">
                 <nuxt />
             </v-col>
         </v-row>

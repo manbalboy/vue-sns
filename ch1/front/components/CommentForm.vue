@@ -14,6 +14,7 @@
 </template>
 
 <script>
+    import { mapState, mapActions } from 'vuex';
     export default {
         name: 'CommentForm',
         props: {
@@ -32,11 +33,10 @@
             };
         },
         computed: {
-            me() {
-                return this.$store.state.users.me;
-            },
+            ...mapState('users', ['me']),
         },
         methods: {
+            ...mapActions('posts', ['ADD_COMMENT']),
             onChangeTextarea(value) {
                 if (value.length) {
                     this.hideDetails = true;
@@ -46,15 +46,14 @@
             },
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
-                    this.$store
-                        .dispatch('posts/ADD_COMMENT', {
-                            id: Date.now(),
-                            postId: this.postId,
-                            content: this.content,
-                            User: {
-                                nickname: this.me.nickname,
-                            },
-                        })
+                    this.ADD_COMMENT({
+                        id: Date.now(),
+                        postId: this.postId,
+                        content: this.content,
+                        User: {
+                            nickname: this.me.nickname,
+                        },
+                    })
                         .then(() => {
                             this.content = '';
                             this.success = true;
