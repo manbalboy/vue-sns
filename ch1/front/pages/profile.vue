@@ -34,11 +34,14 @@
         components: {
             FollowList,
         },
+
+        middleware: 'authenticated',
+
         data() {
             return {
                 valid: false,
                 nickname: '',
-                nicknameRulesL: [v => !!v || '닉네임을 입력하세요'],
+                nicknameRules: [v => !!v || '닉네임을 입력하세요'],
             };
         },
 
@@ -49,7 +52,15 @@
         },
 
         computed: {
-            ...mapState('users', ['followerList', 'followingList']),
+            ...mapState('users', ['me', 'followerList', 'followingList']),
+        },
+
+        watch: {
+            me(value) {
+                if (!value) {
+                    this.$router.push({ path: '/' });
+                }
+            },
         },
 
         methods: {

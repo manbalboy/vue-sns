@@ -42,10 +42,12 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     export default {
         // layout : 'admin',
         name: 'Signup',
+
+        middleware: 'anonymous',
         data() {
             return {
                 valid: false,
@@ -70,6 +72,18 @@
                 title: 'signup',
             };
         },
+        computed: {
+            ...mapState('users', ['me']),
+        },
+
+        watch: {
+            me(value) {
+                if (value) {
+                    this.$router.push({ path: '/' });
+                }
+            },
+        },
+
         methods: {
             ...mapActions('users', ['SIGN_UP']),
             onSubmitForm() {
