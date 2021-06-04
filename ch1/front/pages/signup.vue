@@ -48,6 +48,7 @@
         name: 'Signup',
 
         middleware: 'anonymous',
+
         data() {
             return {
                 valid: false,
@@ -67,11 +68,13 @@
                 termsRulse: [v => !!v || '약관에 동의해야합니다.'],
             };
         },
+
         head() {
             return {
                 title: 'signup',
             };
         },
+
         computed: {
             ...mapState('users', ['me']),
         },
