@@ -43,7 +43,7 @@
             ...mapActions('users', ['LOGIN', 'LOGOUT']),
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
-                    this.LOGIN({ email: this.email, nickname: 'manbalboy' });
+                    this.LOGIN({ email: this.email, password: this.password, nickname: this.nickname });
                 } else {
                     console.log(this.valid);
                 }

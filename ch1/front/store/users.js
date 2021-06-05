@@ -16,9 +16,11 @@ export const mutations = {
     SET_ME(state, payload) {
         state.me = payload;
     },
+
     CHANGE_NICKNAME(state, payload) {
         state.me['nickname'] = payload.nickname;
     },
+
     ADD_FOLLOWING(state, payload) {
         state.followingList.push(payload);
     },
@@ -48,6 +50,7 @@ export const mutations = {
         state.followerList = state.followerList.concat(fakeUsers);
         state.hasMoreFollower = fakeUsers.length === limit;
     },
+
     LOAD_FOLLOWINGS(state) {
         const diff = totalFollowing - state.followingList.length;
         const fakeUsers = Array(diff > limit ? limit : diff)
@@ -63,11 +66,38 @@ export const mutations = {
 
 export const actions = {
     SIGN_UP(context, payload) {
-        context.commit('SET_ME', payload);
+        console.log('SIGN_UP', payload);
+        this.$axios
+            .post('http://localhost:3085/user', {
+                email: payload.email,
+                nickname: payload.nickname,
+                password: payload.password,
+            })
+            .then(res => {
+                context.commit('SET_ME', res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     },
 
     LOGIN(context, payload) {
-        context.commit('SET_ME', payload);
+        this.$axios
+            .post(
+                'http://localhost:3085/user/login',
+                {
+                    email: payload.email,
+                    nickname: payload.nickname,
+                    password: payload.password,
+                },
+                { withCredentials: true },
+            )
+            .then(res => {
+                context.commit('SET_ME', res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     },
 
     LOGOUT(context) {

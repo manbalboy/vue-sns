@@ -14,9 +14,9 @@
                 <v-container>
                     <v-subheader>팔로잉</v-subheader>
                     <follow-list :users="followingList" :remove="removeFollowing" />
-                    <v-btn v-if="hasMoreFollowing" dark color="blue" style="width: 100%" @click="LOAD_FOLLOWINGS"
-                        >더보기</v-btn
-                    >
+                    <v-btn v-if="hasMoreFollowing" dark color="blue" style="width: 100%" @click="LOAD_FOLLOWINGS">
+                        더보기
+                    </v-btn>
                 </v-container>
             </v-card>
             <v-card style="margin-bottom: 20px">

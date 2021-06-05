@@ -91,7 +91,7 @@
             ...mapActions('users', ['SIGN_UP']),
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
-                    this.SIGN_UP({ email: this.email, nickname: this.nickname })
+                    this.SIGN_UP({ email: this.email, nickname: this.nickname, password: this.password })
                         .then(() => {
                             this.$router.push({ path: '/' });
                         })
