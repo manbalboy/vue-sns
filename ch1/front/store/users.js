@@ -101,7 +101,14 @@ export const actions = {
     },
 
     LOGOUT(context) {
-        context.commit('SET_ME', null);
+        this.$axios
+            .post('http://localhost:3085/user/logout', {}, { withCredentials: true })
+            .then(() => {
+                context.commit('SET_ME', null);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     },
 
     CHANGE_NICKNAME(context, payload) {

@@ -5,24 +5,12 @@
 
 const db = require('../../models');
 const { QueryTypes } = require('sequelize');
-// const passport = require('passport');
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
-// const jwt = require('jsonwebtoken');
 const passport = require('passport');
-// const redis = require('redis');
-// const { CODE_MESSAGE_TOKEN } = require('../../CONST_CODE_MESSAGE.js');
 
 const dotenv = require('dotenv');
 dotenv.config(); //LOAD CONFIG
-
-// const client = redis.createClient({
-//     host: process.env.REDIS_HOST,
-//     port: process.env.REDIS_PORT,
-// });
-
-// const { promisify } = require('util');
-// const getAsync = promisify(client.get).bind(client);
 
 /**
  * @author : manbalboy <manbalboy@hanmail.net>
@@ -85,4 +73,15 @@ exports.post_login = async (req, res, next) => {
         console.error(error);
         return next(error);
     }
+};
+
+exports.post_logout = (req, res) => {
+    if (req.isAuthenticated()) {
+        req.logout();
+        req.session.destroy();
+    }
+
+    return res.status(200).json({
+        message: '로그아웃 되었습니다.',
+    });
 };

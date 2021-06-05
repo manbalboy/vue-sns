@@ -2,6 +2,8 @@
  * @author : manbalboy <manbalboy@hanmail.net>
  * @version 0.0.1
  */
+const dotenv = require('dotenv');
+dotenv.config(); //LOAD CONFIG
 
 const express = require('express');
 const nunjucks = require('nunjucks');
@@ -16,10 +18,14 @@ const passport = require('passport');
 const cors = require('cors');
 const passportConfig = require('./passport');
 
-passportConfig();
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
+const client = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+});
 
-const dotenv = require('dotenv');
-dotenv.config(); //LOAD CONFIG
+passportConfig();
 
 class App {
     constructor() {
@@ -87,10 +93,15 @@ class App {
         this.app.use(cookieParser(process.env.COOKIE_SECRET));
 
         //express-session setting
+
         this.app.use(
             session({
                 resave: false,
                 saveUninitialized: false,
+                store: new RedisStore({
+                    client,
+                    ttl: 20,
+                }),
                 secret: process.env.COOKIE_SECRET,
                 cookie: {
                     httpOnly: true,
@@ -140,6 +151,7 @@ class App {
     status404() {
         // eslint-disable-next-line no-unused-vars
         this.app.use((req, res, _) => {
+            console.log('req.session', req.session);
             res.status(404).json({ msg: 404 });
         });
     }

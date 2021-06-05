@@ -1,17 +1,17 @@
 const passport = require('passport');
 const local = require('./localStrategy');
-// const kakao = require('./kakaoStrategy');
-const { User } = require('../models');
+const dotenv = require('dotenv');
+dotenv.config(); //LOAD CONFIG
 
 module.exports = () => {
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user);
     });
 
     passport.deserializeUser(async (id, done) => {
+        console.log('id', id);
         try {
-            const user = await User.findOne({ where: { id } });
-            return done(null, user);
+            return done(null, id);
         } catch (err) {
             console.error(err);
             return done(err);
@@ -19,5 +19,4 @@ module.exports = () => {
     });
 
     local();
-    // kakao();
 };
