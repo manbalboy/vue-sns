@@ -1,16 +1,16 @@
 export const state = () => ({
     me: null,
-    followerList: [
-        { id: 1, nickname: 'manbalboy' },
-        { id: 2, nickname: 'sunjoong01' },
-        { id: 3, nickname: 'manbalboy2' },
-    ],
-    followingList: [
-        { id: 1, nickname: 'manbalboy' },
-        { id: 2, nickname: 'sunjoong01' },
-        { id: 3, nickname: 'manbalboy2' },
-    ],
+    followerList: [],
+    followingList: [],
+
+    hasMoreFollower: true,
+    hasMoreFollowing: true,
 });
+
+const totalFollowers = 8;
+const totalFollowing = 9;
+
+const limit = 3;
 
 export const mutations = {
     SET_ME(state, payload) {
@@ -35,6 +35,29 @@ export const mutations = {
     REMOVE_FOLLOWER(state, payload) {
         const index = state.followerList.findIndex(v => v.id === payload.id);
         state.followerList.splice(index, 1);
+    },
+
+    LOAD_FOLLOWERS(state) {
+        const diff = totalFollowers - state.followerList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff)
+            .fill()
+            .map(() => ({
+                id: Math.random().toString(),
+                nickname: Math.floor(Math.random() * 10000),
+            }));
+        state.followerList = state.followerList.concat(fakeUsers);
+        state.hasMoreFollower = fakeUsers.length === limit;
+    },
+    LOAD_FOLLOWINGS(state) {
+        const diff = totalFollowing - state.followingList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff)
+            .fill()
+            .map(() => ({
+                id: Math.random().toString(),
+                nickname: Math.floor(Math.random() * 10000),
+            }));
+        state.followingList = state.followingList.concat(fakeUsers);
+        state.hasMoreFollowing = fakeUsers.length === limit;
     },
 };
 
@@ -69,5 +92,16 @@ export const actions = {
 
     REMOVE_FOLLOWER(context, payload) {
         context.commit('REMOVE_FOLLOWER', payload);
+    },
+
+    LOAD_FOLLOWINGS(context) {
+        if (context.state.hasMoreFollowing) {
+            context.commit('LOAD_FOLLOWINGS');
+        }
+    },
+    LOAD_FOLLOWERS(context) {
+        if (context.state.hasMoreFollower) {
+            context.commit('LOAD_FOLLOWERS');
+        }
     },
 };

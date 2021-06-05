@@ -6,7 +6,7 @@
                     <v-subheader> 내 프로필 </v-subheader>
                     <v-form v-model="valid" @submit.prevent="onChangeNickname">
                         <v-text-field v-model="nickname" label="닉네임" required :rules="nicknameRules" />
-                        <v-btn color="blue" type="submit"> 수정 </v-btn>
+                        <v-btn dark color="blue" type="submit"> 수정 </v-btn>
                     </v-form>
                 </v-container>
             </v-card>
@@ -14,12 +14,18 @@
                 <v-container>
                     <v-subheader>팔로잉</v-subheader>
                     <follow-list :users="followingList" :remove="removeFollowing" />
+                    <v-btn v-if="hasMoreFollowing" dark color="blue" style="width: 100%" @click="LOAD_FOLLOWINGS"
+                        >더보기</v-btn
+                    >
                 </v-container>
             </v-card>
             <v-card style="margin-bottom: 20px">
                 <v-container>
                     <v-subheader>팔로워</v-subheader>
                     <follow-list :users="followerList" :remove="removeFollower" />
+                    <v-btn v-if="hasMoreFollower" dark color="blue" style="width: 100%" @click="LOAD_FOLLOWERS"
+                        >더보기</v-btn
+                    >
                 </v-container>
             </v-card>
         </v-container>
@@ -45,6 +51,11 @@
             };
         },
 
+        fetch() {
+            this.LOAD_FOLLOWERS();
+            this.LOAD_FOLLOWINGS();
+        },
+
         head() {
             return {
                 title: 'profile',
@@ -52,7 +63,7 @@
         },
 
         computed: {
-            ...mapState('users', ['me', 'followerList', 'followingList']),
+            ...mapState('users', ['me', 'followerList', 'followingList', 'hasMoreFollowing', 'hasMoreFollower']),
         },
 
         watch: {
@@ -64,7 +75,7 @@
         },
 
         methods: {
-            ...mapActions('users', ['REMOVE_FOLLOWER', 'REMOVE_FOLLOWING']),
+            ...mapActions('users', ['REMOVE_FOLLOWER', 'REMOVE_FOLLOWING', 'LOAD_FOLLOWERS', 'LOAD_FOLLOWINGS']),
             removeFollower(id) {
                 this.REMOVE_FOLLOWER({ id });
             },
