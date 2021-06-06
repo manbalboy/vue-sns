@@ -93,4 +93,6 @@ router.post('/:id/comment', isLoggedIn, ctrl.post_comment);
 
 router.delete('/:id', ctrl.delete_post);
 
+router.post('/:id/retweet', ctrl.post_retweet);
+
 module.exports = router;

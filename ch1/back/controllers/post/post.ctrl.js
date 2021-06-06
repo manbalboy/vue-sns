@@ -63,6 +63,15 @@ exports.post_images = async (req, res, next) => {
     }
 };
 
+exports.post_retweet = async (req, res, next) => {
+    try {
+        return res.json(req.files.map(v => v.filename));
+    } catch (error) {
+        console.error(error);
+        return next(error);
+    }
+};
+
 exports.delete_post = async (req, res, next) => {
     try {
         await db.Post.destroy({
