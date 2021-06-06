@@ -50,7 +50,7 @@ const router = Router();
  *       content:
  *        application/json:
  *         schema:
- *           $ref: '#/components/schemas/User'
+ *           $ref: '#/components/schemas/TB_USER'
  *      consumes:
  *      - applicaion/json
  *      produces:

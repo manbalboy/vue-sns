@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
  * @swagger
  *  components:
  *    schemas:
- *      User:
+ *      TB_USER:
  *        type: object
  *        required:
  *          - email
@@ -37,19 +37,23 @@ module.exports = class User extends Sequelize.Model {
                     type: Sequelize.STRING(40),
                     allowNull: false, //필수
                     unique: true,
+                    comment: '고객 ID EMAIL',
                 },
                 nickname: {
                     type: Sequelize.STRING(20),
                     allowNull: false,
+                    comment: '고객 NICKNAME',
                 },
                 password: {
                     type: Sequelize.STRING(100),
                     allowNull: false,
+                    comment: '고객 PASSWORD',
                 },
                 provider: {
                     type: Sequelize.STRING(10),
                     allowNull: false,
                     defaultValue: 'local',
+                    comment: '고객 유입 구분',
                 },
                 // snsId: {
                 //     type: Sequelize.STRING(30),
@@ -59,7 +63,8 @@ module.exports = class User extends Sequelize.Model {
             {
                 sequelize,
                 timestamps: true,
-                underscored: false,
+                underscored: true,
+                comment: '고객테이블',
                 modelName: 'User',
                 tableName: 'TB_USER',
                 charset: 'utf8',
@@ -69,6 +74,7 @@ module.exports = class User extends Sequelize.Model {
     }
 
     static associate(db) {
-        // db.User.hasMany(db.Comment, { foreignKey: 'commenter', sourceKey: 'id' });
+        db.User.hasMany(db.Post);
+        db.User.hasMany(db.Comment);
     }
 };
