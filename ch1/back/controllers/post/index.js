@@ -5,6 +5,25 @@
 
 const { Router } = require('express');
 const ctrl = require('./post.ctrl');
+const path = require('path');
+const { isLoggedIn } = require('../../middlewares');
+
+const multer = require('multer');
+const upload = multer({
+    storage: multer.diskStorage({
+        destination(req, file, done) {
+            done(null, 'uploads');
+        },
+        filename(req, file, done) {
+            const ext = path.extname(file.originalname);
+            const basename = path.basename(file.originalname, ext);
+            done(null, basename + Date.now() + ext);
+        },
+    }),
+    limit: {
+        fileSize: 20 * 1024 * 1024,
+    },
+});
 
 /**
  * @swagger
@@ -21,7 +40,7 @@ const router = Router();
  *  /post:
  *    post:
  *      tags:
- *      - POST
+ *      - Post
  *      description: 회원가입 API
  *      requestBody:
  *       required: true
@@ -29,7 +48,7 @@ const router = Router();
  *       content:
  *        application/json:
  *         schema:
- *           $ref: '#/components/schemas/User'
+ *           $ref: '#/components/schemas/TB_POST'
  *      consumes:
  *      - applicaion/json
  *      produces:
@@ -38,6 +57,8 @@ const router = Router();
  *       200:
  *        description: ok
  */
-router.post('/', ctrl.post_post);
+router.post('/', isLoggedIn, ctrl.post_post);
+
+router.post('/images', isLoggedIn, upload.array('image'), ctrl.post_images);
 
 module.exports = router;

@@ -70,7 +70,7 @@ class App {
                  * User.sync({ force: true }) -테이블이 생성되고 이미 존재하는 경우 먼저 삭제합니다.
                  * User.sync({ alter: true }) -데이터베이스에있는 테이블의 현재 상태 (보유 컬럼, 데이터 유형 등)를 확인한 다음 테이블에서 필요한 변경을 수행하여 모델과 일치시킵니다.
                  */
-                db.sequelize.sync({ force: true });
+                db.sequelize.sync();
                 console.log('DB Sync complete.');
             })
             .catch(err => {
@@ -80,6 +80,8 @@ class App {
 
     setMiddleWare() {
         // 미들웨어 셋팅
+        //static setting
+        this.app.use('/', express.static('uploads'));
         //swagger settting
         const specs = swaggerJsdoc(swaggerOptions);
         this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
@@ -93,14 +95,13 @@ class App {
         this.app.use(cookieParser(process.env.COOKIE_SECRET));
 
         //express-session setting
-
         this.app.use(
             session({
                 resave: false,
                 saveUninitialized: false,
                 store: new RedisStore({
                     client,
-                    ttl: 20,
+                    // ttl: 20,
                 }),
                 secret: process.env.COOKIE_SECRET,
                 cookie: {

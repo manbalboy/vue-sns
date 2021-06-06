@@ -16,3 +16,12 @@ exports.post_post = async (req, res, next) => {
         return next(error);
     }
 };
+
+exports.post_images = async (req, res, next) => {
+    try {
+        return res.json(req.files.map(v => v.filename));
+    } catch (error) {
+        console.error(error);
+        return next(error);
+    }
+};
