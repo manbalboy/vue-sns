@@ -5,21 +5,17 @@
                 <v-toolbar-title>
                     <nuxt-link to="/">NodeBird</nuxt-link>
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-toolbar-items>
                     <v-form @submit.prevent="onSearchHashtag">
-                        <v-text-field
-                            v-model="hashtag"
-                            label="검색"
-                            hide-details
-                            prepend-icon="mdi-magnify"
-                            :style="{ display: 'flex', alignItems: 'center' }"
-                        />
+                        <div :style="{ display: 'flex', height: '100%', alignItems: 'center' }">
+                            <v-text-field v-model="hashtag" label="검색" hide-details prepend-icon="mdi-magnify" />
+                        </div>
                     </v-form>
-                    <v-btn text nuxt to="/profile">
+                    <v-btn text nuxt to="/profile" :style="{ display: 'flex', alignItems: 'center' }">
                         <div>프로필</div>
                     </v-btn>
-                    <v-btn text nuxt to="/signup">
+                    <v-btn text nuxt to="/signup" :style="{ display: 'flex', alignItems: 'center' }">
                         <div>회원가입</div>
                     </v-btn>
                 </v-toolbar-items>
@@ -37,28 +33,25 @@
 </template>
 
 <script>
-    import LoginForm from '@/components/LoginForm';
-
+    import LoginForm from '~/components/LoginForm';
     export default {
-        name: 'Default',
         components: {
             LoginForm,
         },
-
         data() {
             return {
                 hashtag: '',
             };
         },
-
-        mounted() {
-            console.log(this.$vuetify.breakpoint.width);
+        head() {
+            return {
+                title: 'NodeBird',
+            };
         },
-
         methods: {
             onSearchHashtag() {
                 this.$router.push({
-                    path: `/hashtag/${this.hashtag}`,
+                    path: `/hashtag/${encodeURIComponent(this.hashtag)}`,
                 });
                 this.hashtag = '';
             },
@@ -66,4 +59,10 @@
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+    }
+</style>

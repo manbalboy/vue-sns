@@ -8,45 +8,43 @@
 
 <script>
     import PostCard from '@/components/PostCard';
-    import { mapState, mapActions } from 'vuex';
-    export default {
-        name: 'Index',
 
+    export default {
         components: {
             PostCard,
         },
-
-        fetch() {
-            this.LOAD_POSTS();
-        },
-
-        head() {
+        data() {
             return {
-                title: 'home',
+                name: 'Nuxt.js',
             };
+        },
+        fetch({ store, params }) {
+            return store.dispatch('posts/loadHashtagPosts', {
+                hashtag: encodeURIComponent(params.id),
+                reset: true,
+            });
         },
 
         computed: {
-            ...mapState('users', ['me']),
-            ...mapState('posts', ['mainPosts', 'hasMorePost']),
+            mainPosts() {
+                return this.$store.state.posts.mainPosts;
+            },
         },
-
         mounted() {
             window.addEventListener('scroll', this.onScroll);
         },
-
         beforeDestroy() {
             window.removeEventListener('scroll', this.onScroll);
         },
         methods: {
-            ...mapActions('posts', ['LOAD_POSTS']),
             onScroll() {
+                console.log('scroll');
                 if (
-                    window.scrollY + document.documentElement.clientHeight >=
+                    window.scrollY + document.documentElement.clientHeight >
                     document.documentElement.scrollHeight - 300
                 ) {
                     if (this.hasMorePost) {
-                        this.LOAD_POSTS();
+                        this.$store.dispatch('posts/loadPosts');
                     }
                 }
             },

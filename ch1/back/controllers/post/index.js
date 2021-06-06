@@ -87,10 +87,9 @@ router.post('/', isLoggedIn, ctrl.post_post);
  *        description: ok
  */
 router.post('/images', isLoggedIn, upload.array('image'), ctrl.post_images);
+router.get('/:id/comments', ctrl.get_comments);
 
 router.post('/:id/comment', isLoggedIn, ctrl.post_comment);
-
-router.get('/:id/comments', ctrl.get_comments);
 
 router.delete('/:id', ctrl.delete_post);
 

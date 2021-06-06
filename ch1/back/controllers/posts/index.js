@@ -15,6 +15,6 @@ const ctrl = require('./posts.ctrl');
 
 const router = Router();
 
-router.post('/', ctrl.post_posts);
+router.get('/', ctrl.post_posts);
 
 module.exports = router;

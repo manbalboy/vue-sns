@@ -14,10 +14,9 @@
                     :rules="[v => !!v.trim() || '내용을 입력하세요.']"
                     @input="onChangeTextarea"
                 />
-                <v-btn type="submit" color="green" absolute right> 짹짹 </v-btn>
-
+                <v-btn type="submit" color="green" absolute right>짹짹</v-btn>
                 <input ref="imageInput" type="file" multiple hidden @change="onChangeImages" />
-                <v-btn type="button" @click="onClickImageUpload">이미지업로드</v-btn>
+                <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
                 <div>
                     <div v-for="(p, i) in imagePaths" :key="p" style="display: inline-block">
                         <img :src="`http://localhost:3085/${p}`" :alt="p" style="width: 200px" />
@@ -32,27 +31,23 @@
 </template>
 
 <script>
-    import { mapState, mapMutations, mapActions } from 'vuex';
-    export default {
-        name: 'PostForm',
+    import { mapState } from 'vuex';
 
+    export default {
         data() {
             return {
-                hideDetails: false,
+                valid: false,
+                hideDetails: true,
                 successMessages: '',
                 success: false,
                 content: '',
-                valid: false,
             };
         },
         computed: {
             ...mapState('users', ['me']),
             ...mapState('posts', ['imagePaths']),
         },
-
         methods: {
-            ...mapActions('posts', ['ADD', 'UPLOAD_IMAGES']),
-            ...mapMutations('posts', ['REMOVE_IMAGE_PATH']),
             onChangeTextarea(value) {
                 if (value.length) {
                     this.hideDetails = true;
@@ -60,39 +55,37 @@
                     this.successMessages = '';
                 }
             },
-
             onSubmitForm() {
-                console.log(this.$refs.form.validate());
                 if (this.$refs.form.validate()) {
-                    this.ADD({
-                        content: this.content,
-                    }).then(() => {
-                        this.content = '';
-                        this.hideDetails = false;
-                        this.success = true;
-                        this.successMessages = '게시글 등록 성공!';
-                    });
+                    this.$store
+                        .dispatch('posts/add', {
+                            content: this.content,
+                        })
+                        .then(() => {
+                            this.content = '';
+                            this.hideDetails = false;
+                            this.success = true;
+                            this.successMessages = '게시글 등록 성공!';
+                        })
+                        .catch(() => {});
                 }
             },
-
             onClickImageUpload() {
                 this.$refs.imageInput.click();
             },
-
             onChangeImages(e) {
                 console.log(e.target.files);
                 const imageFormData = new FormData();
                 [].forEach.call(e.target.files, f => {
-                    imageFormData.append('image', f);
+                    imageFormData.append('image', f); // { image: [file1, file2] }
                 });
-                this.UPLOAD_IMAGES(imageFormData);
+                this.$store.dispatch('posts/uploadImages', imageFormData);
             },
-
             onRemoveImage(index) {
-                this.REMOVE_IMAGE_PATH(index);
+                this.$store.commit('posts/removeImagePath', index);
             },
         },
     };
 </script>
 
-<style scoped></style>
+<style></style>

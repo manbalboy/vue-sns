@@ -3,6 +3,7 @@
         <v-textarea
             v-model="content"
             filled
+            auto-grow
             label="댓글 달기"
             :hide-details="hideDetails"
             :success="success"
@@ -14,9 +15,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
     export default {
-        name: 'CommentForm',
         props: {
             postId: {
                 type: String,
@@ -33,10 +32,11 @@
             };
         },
         computed: {
-            ...mapState('users', ['me']),
+            me() {
+                return this.$store.state.users.me;
+            },
         },
         methods: {
-            ...mapActions('posts', ['ADD_COMMENT']),
             onChangeTextarea(value) {
                 if (value.length) {
                     this.hideDetails = true;
@@ -46,10 +46,11 @@
             },
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
-                    this.ADD_COMMENT({
-                        postId: this.postId,
-                        content: this.content,
-                    })
+                    this.$store
+                        .dispatch('posts/addComment', {
+                            postId: this.postId,
+                            content: this.content,
+                        })
                         .then(() => {
                             this.content = '';
                             this.success = true;
@@ -63,4 +64,4 @@
     };
 </script>
 
-<style scoped></style>
+<style></style>

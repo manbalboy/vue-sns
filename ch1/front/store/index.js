@@ -1,15 +1,9 @@
-export const state = () => ({
-    hello: 'vuex',
-});
+export const state = () => ({});
 
-export const mutations = {
-    bye(state) {
-        state.hello = 'gg';
-    },
-};
+export const mutations = {};
 
 export const actions = {
-    nuxtServerInit({ dispatch }) {
-        return dispatch('users/LOAD_USER');
+    nuxtServerInit({ commit, dispatch, state }, { req }) {
+        return dispatch('users/loadUser');
     },
 };
