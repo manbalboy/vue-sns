@@ -1,7 +1,7 @@
 <template>
     <div style="margin-bottom: 20px">
         <v-card>
-            <!--        <v-image />-->
+            <post-images :images="post.Images || []" />
             <v-card-title>
                 <h3>
                     <nuxt-link :to="`/user/${post.id}`">{{ post.User.nickname }}</nuxt-link>
@@ -55,9 +55,10 @@
 <script>
     import { mapActions } from 'vuex';
     import CommentForm from '@/components/CommentForm';
+    import PostImages from '@/components/PostImages';
     export default {
         name: 'PostCard',
-        components: { CommentForm },
+        components: { CommentForm, PostImages },
         props: {
             post: {
                 type: Object,
@@ -70,13 +71,17 @@
                 commentOpened: false,
             };
         },
+
         methods: {
-            ...mapActions('posts', ['ADD', 'REMOVE']),
+            ...mapActions('posts', ['ADD', 'REMOVE', 'LOAD_COMMENTS']),
             onRemovePost() {
-                this.REMOVE({ id: this.post.id });
+                this.REMOVE({ postId: this.post.id });
             },
             onEditPost() {},
             onToggleComment() {
+                if (!this.commentOpened) {
+                    this.LOAD_COMMENTS({ postId: this.post.id });
+                }
                 this.commentOpened = !this.commentOpened;
             },
         },

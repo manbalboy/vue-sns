@@ -19,7 +19,6 @@ dotenv.config(); //LOAD CONFIG
 const query = `SELECT * FROM TB_USER`;
 exports.get_products = async (_, res) => {
     let resultsVal = await db.sequelize.query(query, { type: QueryTypes.SELECT });
-    console.log('resultsVal  >> ', resultsVal);
     res.send(resultsVal);
 };
 
@@ -84,4 +83,17 @@ exports.post_logout = (req, res) => {
     return res.status(200).json({
         message: '로그아웃 되었습니다.',
     });
+};
+
+exports.get_user = (req, res) => {
+    try {
+        const user = req.user;
+
+        delete user.password;
+
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        return next(error);
+    }
 };

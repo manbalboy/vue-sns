@@ -14,6 +14,7 @@ const limit = 3;
 
 export const mutations = {
     SET_ME(state, payload) {
+        console.log('SET_ME', payload);
         state.me = payload;
     },
 
@@ -65,6 +66,18 @@ export const mutations = {
 };
 
 export const actions = {
+    LOAD_USER(context) {
+        this.$axios
+            .get(`http://localhost:3085/user`, {
+                withCredentials: true,
+            })
+            .then(res => {
+                context.commit('SET_ME', res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    },
     SIGN_UP(context, payload) {
         console.log('SIGN_UP', payload);
         this.$axios

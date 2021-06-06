@@ -4,7 +4,7 @@
  */
 
 const { Router } = require('express');
-const { isNotLoggedIn } = require('../../middlewares.js');
+const { isNotLoggedIn, isLoggedIn } = require('../../middlewares.js');
 const ctrl = require('./user.ctrl');
 
 /**
@@ -35,6 +35,8 @@ const ctrl = require('./user.ctrl');
  */
 
 const router = Router();
+
+router.get('/', isLoggedIn, ctrl.get_user);
 
 /**
  * @swagger

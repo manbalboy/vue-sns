@@ -7,3 +7,9 @@ export const mutations = {
         state.hello = 'gg';
     },
 };
+
+export const actions = {
+    nuxtServerInit({ dispatch }) {
+        return dispatch('users/LOAD_USER');
+    },
+};

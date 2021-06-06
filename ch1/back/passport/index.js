@@ -9,7 +9,6 @@ module.exports = () => {
     });
 
     passport.deserializeUser(async (id, done) => {
-        console.log('id', id);
         try {
             return done(null, id);
         } catch (err) {

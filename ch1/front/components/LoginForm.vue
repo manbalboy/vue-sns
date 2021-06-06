@@ -40,7 +40,7 @@
         },
 
         methods: {
-            ...mapActions('users', ['LOGIN', 'LOGOUT']),
+            ...mapActions('users', ['LOGIN', 'LOGOUT', 'LOAD_USER']),
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
                     this.LOGIN({ email: this.email, password: this.password, nickname: this.nickname });

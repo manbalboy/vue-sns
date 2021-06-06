@@ -59,6 +59,39 @@ const router = Router();
  */
 router.post('/', isLoggedIn, ctrl.post_post);
 
+/**
+ * @swagger
+ *  paths:
+ *  /post/images:
+ *    post:
+ *      tags:
+ *      - Post
+ *      description: imageupload
+ *      requestBody:
+ *          content:
+ *              multipart/form-data:
+ *                  schema:
+ *                      type: object
+ *                  properties:
+ *                      filename:
+ *                          type: array
+ *                          items:
+ *                              type: string
+ *                              format: binary
+ *      consumes:
+ *      - applicaion/json
+ *      produces:
+ *      - applicaion/json
+ *      responses:
+ *       200:
+ *        description: ok
+ */
 router.post('/images', isLoggedIn, upload.array('image'), ctrl.post_images);
+
+router.post('/:id/comment', isLoggedIn, ctrl.post_comment);
+
+router.get('/:id/comments', ctrl.get_comments);
+
+router.delete('/:id', ctrl.delete_post);
 
 module.exports = router;

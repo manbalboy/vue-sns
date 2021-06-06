@@ -47,12 +47,8 @@
             onSubmitForm() {
                 if (this.$refs.form.validate()) {
                     this.ADD_COMMENT({
-                        id: Date.now(),
                         postId: this.postId,
                         content: this.content,
-                        User: {
-                            nickname: this.me.nickname,
-                        },
                     })
                         .then(() => {
                             this.content = '';

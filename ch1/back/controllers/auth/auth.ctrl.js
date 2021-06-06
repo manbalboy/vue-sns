@@ -31,7 +31,6 @@ const getAsync = promisify(client.get).bind(client);
 const query = `SELECT * FROM TB_USER`;
 exports.get_products = async (_, res) => {
     let resultsVal = await db.sequelize.query(query, { type: QueryTypes.SELECT });
-    console.log('resultsVal  >> ', resultsVal);
     res.send(resultsVal);
 };
 

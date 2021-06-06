@@ -39,6 +39,14 @@ module.exports = class Post extends Sequelize.Model {
                     allowNull: false, //필수
                     comment: '게시글',
                 },
+                ['user_id']: {
+                    type: Sequelize.INTEGER,
+                    allowNull: false, // 모델 간 관계 설정 \
+                    references: {
+                        model: 'User', //user모델의 primery key를 강제로 참조함.
+                        key: 'user_id', //foreign key를 'user_id'로 설정
+                    },
+                },
             },
             {
                 sequelize,
