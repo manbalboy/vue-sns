@@ -79,9 +79,10 @@ export const actions = {
             console.error(err);
         }
     },
-    signUp({ commit, state }, payload) {
-        this.$axios
-            .post(
+    async signUp({ commit }, payload) {
+        console.log('....');
+        try {
+            const res = await this.$axios.post(
                 '/user',
                 {
                     email: payload.email,
@@ -91,13 +92,11 @@ export const actions = {
                 {
                     withCredentials: true,
                 },
-            )
-            .then(res => {
-                commit('setMe', res.data);
-            })
-            .catch(err => {
-                console.error(err);
-            });
+            );
+            commit('setMe', res.data);
+        } catch (err) {
+            return Promise.reject(err);
+        }
     },
     logIn({ commit }, payload) {
         this.$axios
@@ -105,6 +104,7 @@ export const actions = {
                 '/user/login',
                 {
                     email: payload.email,
+
                     password: payload.password,
                 },
                 {

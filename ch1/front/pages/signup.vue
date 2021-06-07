@@ -90,7 +90,8 @@
                             email: this.email,
                             password: this.password,
                         })
-                        .then(() => {
+                        .then(res => {
+                            console.log('res >> ', res);
                             this.$router.push({
                                 path: '/',
                             });
