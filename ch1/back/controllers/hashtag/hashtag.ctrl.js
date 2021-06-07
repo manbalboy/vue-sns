@@ -6,8 +6,8 @@ const db = require('../../models');
 const dotenv = require('dotenv');
 dotenv.config(); //LOAD CONFIG
 
-exports.post_posts = async (req, res, next) => {
-    // GET /posts?offset=10&limit=10
+exports.get_tag = async (req, res, next) => {
+    // GET /hashtag/:tag?lastId=10&limit=10
     try {
         let where = {};
         if (parseInt(req.query.lastId, 10)) {
@@ -20,6 +20,10 @@ exports.post_posts = async (req, res, next) => {
         const posts = await db.Post.findAll({
             where,
             include: [
+                {
+                    model: db.Hashtag,
+                    where: { name: decodeURIComponent(req.params.tag) },
+                },
                 {
                     model: db.User,
                     attributes: ['id', 'nickname'],

@@ -9,5 +9,6 @@ router.use('/auth', require('./auth'));
 router.use('/user', require('./user'));
 router.use('/post', require('./post'));
 router.use('/posts', require('./posts'));
+router.use('/hashtag', require('./hashtag'));
 
 module.exports = router;

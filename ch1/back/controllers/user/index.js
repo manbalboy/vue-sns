@@ -38,6 +38,8 @@ const router = Router();
 
 router.get('/', isLoggedIn, ctrl.get_user);
 
+router.get('/:id', ctrl.get_user_id);
+
 /**
  * @swagger
  *  paths:
@@ -115,5 +117,19 @@ router.post('/login', isNotLoggedIn, ctrl.post_login);
  *        description: ok
  */
 router.post('/logout', ctrl.post_logout);
+
+router.delete('/:id/follower', isLoggedIn, ctrl.delete_follower);
+
+router.delete('/:id/follow', isLoggedIn, ctrl.delete_follow);
+
+router.get('/:id/followers', isLoggedIn, ctrl.get_follower);
+
+router.get('/:id/followings', isLoggedIn, ctrl.get_followings);
+
+router.patch('/nickname', isLoggedIn, ctrl.patch_nickname);
+
+router.post('/:id/follow', isLoggedIn, ctrl.post_follow);
+
+router.get('/:id/posts', ctrl.get_posts);
 
 module.exports = router;

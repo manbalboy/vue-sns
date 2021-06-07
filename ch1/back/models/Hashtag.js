@@ -27,10 +27,7 @@ module.exports = class Hashtag extends Sequelize.Model {
             },
             {
                 sequelize,
-                timestamps: true,
-                underscored: true,
                 modelName: 'Hashtag',
-                tableName: 'TB_HASHTAG',
                 comment: '해시태그 테이블',
                 charset: 'utf8mb4',
                 collate: 'utf8mb4_general_ci',

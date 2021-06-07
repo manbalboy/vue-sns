@@ -27,11 +27,8 @@ module.exports = class Image extends Sequelize.Model {
             },
             {
                 sequelize,
-                timestamps: true,
-                underscored: true,
                 modelName: 'Image',
                 comment: '이미지 테이블',
-                tableName: 'TB_IMAGE',
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
             },
@@ -39,6 +36,6 @@ module.exports = class Image extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Image.belongsTo(db.Post, { foreignKey: 'post_id' });
+        db.Image.belongsTo(db.Post);
     }
 };

@@ -95,4 +95,8 @@ router.delete('/:id', ctrl.delete_post);
 
 router.post('/:id/retweet', ctrl.post_retweet);
 
+router.post('/:id/like', isLoggedIn, ctrl.post_like);
+
+router.delete('/:id/like', isLoggedIn, ctrl.delete_like);
+
 module.exports = router;
