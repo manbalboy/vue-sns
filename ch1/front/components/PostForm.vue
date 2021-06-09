@@ -19,7 +19,7 @@
                 <v-btn type="button" @click="onClickImageUpload">이미지 업로드</v-btn>
                 <div>
                     <div v-for="(p, i) in imagePaths" :key="p" style="display: inline-block">
-                        <img :src="`http://localhost:3085/${p}`" :alt="p" style="width: 200px" />
+                        <img :src="`http://java-coder.co.kr:18921/${p}`" :alt="p" style="width: 200px" />
                         <div>
                             <button type="button" @click="onRemoveImage(i)">제거</button>
                         </div>

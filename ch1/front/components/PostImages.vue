@@ -1,19 +1,19 @@
 <template>
     <div v-if="images.length === 0"></div>
     <div v-else-if="images.length === 1">
-        <v-img :src="`http://localhost:3085/${images[0].src}`" contain aspect-ratio="2" @click="zoomImages" />
+        <v-img :src="`http://java-coder.co.kr:18921/${images[0].src}`" contain aspect-ratio="2" @click="zoomImages" />
         <image-zoom v-if="imageZoomed" :close-modal="closeModal" :images="images" />
     </div>
     <div v-else-if="images.length === 2" style="display: flex">
         <v-img
-            :src="`http://localhost:3085/${images[0].src}`"
+            :src="`http://java-coder.co.kr:18921/${images[0].src}`"
             contain
             aspect-ratio="2"
             style="flex: 1"
             @click="zoomImages"
         />
         <v-img
-            :src="`http://localhost:3085/${images[1].src}`"
+            :src="`http://java-coder.co.kr:18921/${images[1].src}`"
             contain
             aspect-ratio="2"
             style="flex: 1"
@@ -23,7 +23,7 @@
     </div>
     <div v-else-if="images.length > 2" style="display: flex">
         <v-img
-            :src="`http://localhost:3085/${images[0].src}`"
+            :src="`http://java-coder.co.kr:18921/${images[0].src}`"
             contain
             aspect-ratio="2"
             style="flex: 1"

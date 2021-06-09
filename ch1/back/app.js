@@ -17,6 +17,8 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const cors = require('cors');
 const passportConfig = require('./passport');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 const RedisStore = require('connect-redis')(session);
 const redis = require('redis');
@@ -82,6 +84,8 @@ class App {
         // 미들웨어 셋팅
         //static setting
         this.app.use('/', express.static('uploads'));
+        this.app.use(hpp());
+        this.app.use(helmet());
         //swagger settting
         const specs = swaggerJsdoc(swaggerOptions);
         this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));

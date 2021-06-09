@@ -6,7 +6,7 @@ module.exports = {
             version: '1.0.0',
             description: 'a Rest api using swagger and express.',
         },
-        host: 'localhost:3085',
+        host: 'java-coder.co.kr:18921',
         basePath: '/',
         schemes: ['http'],
     },
