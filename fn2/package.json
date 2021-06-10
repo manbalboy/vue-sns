@@ -1,0 +1,35 @@
+{
+  "name": "vue-nodebird-front",
+  "version": "1.0.0",
+  "description": "vue node bird study",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production pm2 start server.js",
+    "dev": "nuxt"
+  },
+  "author": "manbalboy",
+  "license": "MIT",
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/vuetify": "^1.11.3",
+    "axios": "^0.21.1",
+    "cross-env": "^5.2.1",
+    "express": "^4.17.1",
+    "lodash.throttle": "^4.1.1",
+    "nuxt": "^2.15.6",
+    "pm2": "^5.0.4",
+    "vue": "^2.6.13",
+    "vuetify": "^2.5.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.10.0",
+    "prettier": "^2.3.0"
+  }
+}
