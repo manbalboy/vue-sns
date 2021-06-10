@@ -3,7 +3,7 @@ export const state = () => ({});
 export const mutations = {};
 
 export const actions = {
-    nuxtServerInit({ commit, dispatch, state }, { req }) {
+    nuxtServerInit({ dispatch }) {
         return dispatch('users/loadUser');
     },
 };

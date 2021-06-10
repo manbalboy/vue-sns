@@ -12,7 +12,7 @@
             </v-card>
             <v-card style="margin-bottom: 20px">
                 <v-container>
-                    <v-subheader>팔로잉</v-subheader>
+                    <v-subheader>팔로잉 {{ test }}</v-subheader>
                     <follow-list :users="followingList" :remove="removeFollowing" />
                     <v-btn v-if="hasMoreFollowing" dark color="blue" style="width: 100%" @click="loadMoreFollowings">
                         더보기
@@ -34,14 +34,20 @@
 
 <script>
     import FollowList from '@/components/FollowList';
+    import axios from 'axios';
 
     export default {
         components: {
             FollowList,
         },
         middleware: 'authenticated',
+        async asyncData() {
+            const res = await axios.get('https://api.hnpwa.com/v0/news/1.json');
+            return { test: res.data };
+        },
         data() {
             return {
+                test: '',
                 valid: false,
                 nickname: '',
                 nicknameRules: [v => !!v || '닉네임을 입력하세요.'],

@@ -13,6 +13,10 @@
                         </div>
                     </v-form>
 
+                    <v-btn text nuxt to="/test7" :style="{ display: 'flex', alignItems: 'center' }">
+                        <div>created setTimeout</div>
+                    </v-btn>
+
                     <v-btn text nuxt to="/test5" :style="{ display: 'flex', alignItems: 'center' }">
                         <div>base setTimeout</div>
                     </v-btn>

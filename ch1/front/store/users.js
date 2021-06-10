@@ -165,7 +165,7 @@ export const actions = {
             offset = 0;
         }
         return this.$axios
-            .get(`/user/${state.me.id}/followers?limit=3&offset=${offset}`, {
+            .get(`/user/1/followers?limit=3&offset=${offset}`, {
                 withCredentials: true,
             })
             .then(res => {
@@ -187,7 +187,7 @@ export const actions = {
             offset = 0;
         }
         return this.$axios
-            .get(`/user/${state.me.id}/followings?limit=3&offset=${offset}`, {
+            .get(`/user/1/followings?limit=3&offset=${offset}`, {
                 withCredentials: true,
             })
             .then(res => {
