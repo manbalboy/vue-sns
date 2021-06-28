@@ -6,8 +6,10 @@
   "scripts": {
     "test": "test",
     "dev": "nuxt",
-    "build" : "nuxt build",
-    "start" : "nuxt start"
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "storybook": "start-storybook -p 6006 --no-manager-cache",
+    "build-storybook": "build-storybook"
   },
   "author": "manbalboy",
   "license": "MIT",
@@ -17,16 +19,28 @@
     "axios": "^0.21.1",
     "lodash.throttle": "^4.1.1",
     "nuxt": "^2.15.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "vue": "^2.6.13",
     "vuetify": "^2.5.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.3.1",
+    "@storybook/addon-essentials": "^6.3.1",
+    "@storybook/addon-links": "^6.3.1",
+    "@storybook/addons": "^6.3.1",
+    "@storybook/api": "^6.3.1",
+    "@storybook/components": "^6.3.1",
+    "@storybook/vue": "^6.3.1",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.10.0",
-    "prettier": "^2.3.0"
+    "prettier": "^2.3.0",
+    "vue-loader": "^15.9.7"
   }
 }
