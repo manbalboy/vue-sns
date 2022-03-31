@@ -3,7 +3,7 @@ module.exports = {
         // 브라우저의 document와 같은 객체 사용 여부
         browser: false,
         // node.js에서 console과 같은 전역변수 사용 여부
-        node: true,
+        node: true, 
     },
 
     plugins: ['prettier'],
